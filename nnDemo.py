@@ -51,7 +51,7 @@ if __name__ == "__main__":
     #inicializacion de la clase neuron
     neural_network = NeuralNetwork()
 	
-    print("Beginning Randomly Generated Weights: ")
+    print("Pesos al azar: ")
     print(neural_network.synaptic_weights)
 
     #data de entrenamiento de 3 entradas y 1 salida

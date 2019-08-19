@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 #618/1200 imagen
 img = cv2.imread('rs1.jpg',0)
 
-scale_percent = 1 # percent to scale
+scale_percent = 20 # percent to scale
 width = int(img.shape[1] * scale_percent / 100)
 height = int(img.shape[0] * scale_percent / 100)
 dim = (width, height)

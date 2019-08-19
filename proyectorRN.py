@@ -93,22 +93,24 @@ if __name__ == "__main__":
     training_inputs = np.array([[0,0],
                                 [1,1],
                                 [1,0],
-                                [0,1]])
+                                [0,1],
+                                [1,0]])
 
-    training_outputs = np.array([[0,1,1,0]]).T
+    training_outputs = np.array([[0,1,1,0,1]]).T
     #training_inputs = np.array(getImg())
-    training_outputs = np.array([[0,1]]).T
+    #training_outputs = np.array([[0,1]]).T
+    
     iterations = int(input("Iteraciones:"))
     #loop de entrenamiento entradas, salidas, iteraciones de aprendizaje
     neural_network.train(training_inputs, training_outputs, iterations)
 
     print("Pesos de capa oculta entrenados: ")
     print(neural_network.synaptic_weights)	
-    user_input_one = 0
-    user_input_two = 1
+    user_input_one = 1
+    user_input_two = 0
    
     #re=neural_network.think(np.array(getImg()))
-    re=neural_network.think(np.array([user_input_one, user_input_two, user_input_three]))
+    re=neural_network.think(np.array([user_input_one, user_input_two]))
     print("Resultado: ")
     
     #if neural_network.think(np.array(getImg()))>0.5:
@@ -116,6 +118,7 @@ if __name__ == "__main__":
         print("Es una lata")
     else:
         print("No es una lata")
+    #conversion de la imagen a matriz
     matrix = getImg()
     print(np.matrix(matrix))
     
