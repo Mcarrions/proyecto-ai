@@ -90,13 +90,13 @@ if __name__ == "__main__":
     print(neural_network.synaptic_weights)
 
     #data de entrenamiento de entradas y 1 salida con la respuesta esperada
-    #training_inputs = np.array([[0,0],
-    #                            [1,1],
-    #                            [1,0],
-    #                            [0,1]])
+    training_inputs = np.array([[0,0],
+                                [1,1],
+                                [1,0],
+                                [0,1]])
 
-    #training_outputs = np.array([[0,1,1,0]]).T
-    training_inputs = np.array(getImg())
+    training_outputs = np.array([[0,1,1,0]]).T
+    #training_inputs = np.array(getImg())
     training_outputs = np.array([[0,1]]).T
     iterations = int(input("Iteraciones:"))
     #loop de entrenamiento entradas, salidas, iteraciones de aprendizaje
@@ -107,10 +107,12 @@ if __name__ == "__main__":
     user_input_one = 0
     user_input_two = 1
    
-    re=neural_network.think(np.array(getImg()))
+    #re=neural_network.think(np.array(getImg()))
+    re=neural_network.think(np.array([user_input_one, user_input_two, user_input_three]))
     print("Resultado: ")
     
-    if neural_network.think(np.array(getImg()))>0.5:
+    #if neural_network.think(np.array(getImg()))>0.5:
+    if neural_network.think(np.array([user_input_one, user_input_two]))>0.5:
         print("Es una lata")
     else:
         print("No es una lata")

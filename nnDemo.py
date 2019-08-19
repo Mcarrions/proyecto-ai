@@ -65,15 +65,11 @@ if __name__ == "__main__":
     #loop de entrenamiento entradas, salidas, iteraciones de aprendizaje
     neural_network.train(training_inputs, training_outputs, 10000)
 
-    print("Ending Weights After Training: ")
     print(neural_network.synaptic_weights)	
-    user_input_one = str(input("User Input One: "))
-    user_input_two = str(input("User Input Two: "))
-    user_input_three = str(input("User Input Three: "))
-    user_input_four = str(input("User Input Four: "))
+    user_input_one = str(input("1: "))
+    user_input_two = str(input("2: "))
+    user_input_three = str(input("3: "))
     re=neural_network.think(np.array([user_input_one, user_input_two, user_input_three]))
-    print("Considering New Situation: ", user_input_one, user_input_two, user_input_three)
-    print("New Output data: ")
     print(neural_network.think(np.array([user_input_one, user_input_two, user_input_three])))
 	
 	
