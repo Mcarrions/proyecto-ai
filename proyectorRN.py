@@ -5,11 +5,11 @@ from matplotlib import pyplot as plt
 class NeuralNetwork():
     
     def __init__(self):
-        # seeding para numero random
+        # seeding para numero random del 1-0 para los pesos iniciales
         np.random.seed(1)
         
         #convierte los pesos a una matriz de 3 por 1 con valores del 1 a -1 y la media de 0
-        self.synaptic_weights = 2 * np.random.random((3, 1)) - 1
+        self.synaptic_weights = 2 * np.random.random((2, 1)) - 1
 
     def sigmoid(self, x):
         #formula sigmoide
@@ -46,7 +46,7 @@ class NeuralNetwork():
 def getImg():
     #618/1200 imagen
     img = cv2.imread('rs1.jpg',0)
-    scale_percent = 1 # percent to scale
+    scale_percent = 5 #porciento de escala
     width = int(img.shape[1] * scale_percent / 100)
     height = int(img.shape[0] * scale_percent / 100)
     dim = (width, height)
@@ -68,43 +68,52 @@ def getImg():
 
     px = [[0 for f in range(w)]for g in range(h)]
 
+    
         #asignar 
     for x in range(width-1):
         for y in range(height-1):
-            px[y][x] = edges[y,x]
-            
+            if edges[y,x] == 255:
+                    px[y][x] = 1
+            else:
+                px[y][x] = edges[y,x]
+    
+    #abrir el archivo
+    np.savetxt('output.txt', px, fmt='%.2e')
+        
     return px
 
 
 if __name__ == "__main__":
     #inicializacion de la clase neuron
     neural_network = NeuralNetwork()
-    print("Beginning Randomly Generated Weights: ")
+    print("Calculando pesos aleatorios: ")
     print(neural_network.synaptic_weights)
 
-    #data de entrenamiento de 3 entradas y 1 salida
-    training_inputs = np.array([[0,0,1],
-                                [1,1,1],
-                                [1,0,1],
-                                [0,1,1]])
+    #data de entrenamiento de entradas y 1 salida con la respuesta esperada
+    #training_inputs = np.array([[0,0],
+    #                            [1,1],
+    #                            [1,0],
+    #                            [0,1]])
 
-    training_outputs = np.array([[0,1,1,0]]).T
-
+    #training_outputs = np.array([[0,1,1,0]]).T
+    training_inputs = np.array(getImg())
+    training_outputs = np.array([[0,1]]).T
+    iterations = int(input("Iteraciones:"))
     #loop de entrenamiento entradas, salidas, iteraciones de aprendizaje
-    neural_network.train(training_inputs, training_outputs, 10000)
+    neural_network.train(training_inputs, training_outputs, iterations)
 
-    print("Ending Weights After Training: ")
+    print("Pesos de capa oculta entrenados: ")
     print(neural_network.synaptic_weights)	
-    user_input_one = str(input("User Input One: "))
-    user_input_two = str(input("User Input Two: "))
-    user_input_three = str(input("User Input Three: "))
-    user_input_four = str(input("User Input Four: "))
-    re=neural_network.think(np.array([user_input_one, user_input_two, user_input_three]))
-    print("Considering New Situation: ", user_input_one, user_input_two, user_input_three)
-    print("New Output data: ")
-    print(neural_network.think(np.array([user_input_one, user_input_two, user_input_three])))
+    user_input_one = 0
+    user_input_two = 1
+   
+    re=neural_network.think(np.array(getImg()))
+    print("Resultado: ")
+    
+    if neural_network.think(np.array(getImg()))>0.5:
+        print("Es una lata")
+    else:
+        print("No es una lata")
     matrix = getImg()
     print(np.matrix(matrix))
-    #test
-	    
-	
+    
